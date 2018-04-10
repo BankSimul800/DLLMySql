@@ -14,6 +14,7 @@ public:
     CreateConnection();
     ~CreateConnection();
     bool openConnection();
+    QString getBalance();
 };
 
 #endif // CREATECONNECTION_H

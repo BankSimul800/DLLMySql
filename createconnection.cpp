@@ -25,3 +25,21 @@ bool CreateConnection::openConnection()
     return true;
 }
 
+QString CreateConnection::getBalance()
+{
+    QSqlQuery balanceDB;
+
+    balanceDB.prepare("SELECT * FROM tili WHERE idtili=:tili");
+    balanceDB.bindValue(":tili",idtili);
+    balanceDB.exec();
+}
+
+/*
+ * saldokysely
+ * salasanakysely
+ * asiakastietokysely
+ * tapahtumakysely
+ * nostorajakysely
+ * kortinnumeroksely
+ *
+ */
