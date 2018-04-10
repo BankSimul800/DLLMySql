@@ -15,6 +15,7 @@ public:
     ~CreateConnection();
     bool openConnection();
     QString getBalance();
+    bool cardIDCheck(QString id);
 };
 
 #endif // CREATECONNECTION_H
