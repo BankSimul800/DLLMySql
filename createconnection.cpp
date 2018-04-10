@@ -34,6 +34,25 @@ QString CreateConnection::getBalance()
     balanceDB.exec();
 }
 
+bool CreateConnection::cardIDCheck(QString id)
+{
+    QSqlQuery cardCheckDB;
+
+    cardCheckDB.prepare("Select idkortti FROM kortti WHERE idkortti=:id");
+    cardCheckDB.bindValue(":id", id);
+    cardCheckDB.exec();
+    if(cardCheckDB.exec())
+    {
+        return true;
+    }
+            else
+    {
+            return false;
+    }
+
+
+}
+
 /*
  * saldokysely
  * salasanakysely
