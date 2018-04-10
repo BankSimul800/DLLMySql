@@ -16,6 +16,7 @@ bool CreateConnection::openConnection()
     db.setDatabaseName("opisk_t6puos00");
     db.setUserName("t6puos00");
     db.setPassword("T8Xm7Ye6E3gjh8mE");
+    db.open();
     if (!db.open())
     {
         qDebug()<<"ei toimi"<<endl;
