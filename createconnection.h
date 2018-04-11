@@ -14,11 +14,15 @@ public:
     CreateConnection();
     ~CreateConnection();
     bool openConnection();
-    QString getInfo(QString idtili);
     bool cardIDCheck();
     QString getAccID();
     double getPass();
     void setCardNum(QString cardNumber);
+
+    QString getInfoLastname();
+    QString getInfoAddress();
+    QString getInfoPhone();
+    QString getInfo();
 
 private:
     QString cardNum;

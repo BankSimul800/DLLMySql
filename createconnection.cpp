@@ -26,13 +26,13 @@ bool CreateConnection::openConnection()
     return true;
 }
 
-QString CreateConnection::getInfo(QString idtili)
+QString CreateConnection::getInfo()
 {
     QString enimi;
     QSqlQuery infoDB;
 
-    infoDB.prepare("SELECT nimi FROM asiakas WHERE idtili=:idtili");
-    infoDB.bindValue(":idtili",idtili);
+    infoDB.prepare("SELECT etunimi FROM asiakas WHERE idtili=:idtili");
+    infoDB.bindValue(":idtili",accID);
     infoDB.exec();
 
    //QString enimi;
@@ -96,7 +96,65 @@ double CreateConnection::getPass()
     else return 0;
 }
 
+QString CreateConnection::getInfoLastname()
+{
+    QString snimi;
+    QSqlQuery getLastnameDB;
 
+
+    getLastnameDB.prepare("SELECT sukunimi FROM asiakas WHERE idtili=:idtili");
+    getLastnameDB.bindValue(":idtili",accID);
+    getLastnameDB.exec();
+
+
+    if (getLastnameDB.next())
+    {
+        snimi=getLastnameDB.value(2).toString();
+
+        return snimi;
+    }
+else return "ei toimi";
+}
+
+QString CreateConnection::getInfoAddress()
+{
+    QString osoite;
+    QSqlQuery getAddressDB;
+
+
+    getAddressDB.prepare("SELECT osoite FROM asiakas WHERE idtili=:idtili");
+    getAddressDB.bindValue(":idtili",accID);
+    getAddressDB.exec();
+
+
+    if (getAddressDB.next())
+    {
+        snimi=getAddressDB.value(3).toString();
+
+        return osoite;
+    }
+else return "ei toimi";
+}
+
+QString CreateConnection::getInfoPhone()
+{
+    QString puhnum;
+    QSqlQuery getPhoneDB;
+
+
+    getPhoneDB.prepare("SELECT puhnum FROM asiakas WHERE idtili=:idtili");
+    getPhoneDB.bindValue(":idtili",accID);
+    getPhoneDB.exec();
+
+
+    if (getAddressDB.next())
+    {
+        snimi=getAddressDB.value(4).toString();
+
+        return puhnum;
+    }
+else return "ei toimi";
+}
 
 /*
  * saldokysely
