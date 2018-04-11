@@ -26,13 +26,27 @@ bool CreateConnection::openConnection()
     return true;
 }
 
-QString CreateConnection::getBalance()
+void CreateConnection::getInfo(QString idtili)
 {
-    QSqlQuery balanceDB;
+    QSqlQuery infoDB;
 
-    balanceDB.prepare("SELECT * FROM tili WHERE idtili=:tili");
-    balanceDB.bindValue(":tili",idtili);
-    balanceDB.exec();
+    infoDB.prepare("SELECT * FROM tili WHERE idtili=:idtili");
+    infoDB.bindValue(":idtili",idtili);
+    infoDB.exec();
+
+   //QString enimi;
+   //QString snimi;
+   //QString osoite;
+   //QString puhnum;
+
+    while (infoDB.next())
+    {
+        enimi=infoDB.value(1).toString();
+        snimi=infoDB.value(2).toString();
+        osoite=infoDB.value(3).toString();
+        puhnum=infoDB.value(4).toString();
+    }
+
 }
 
 bool CreateConnection::cardIDCheck(QString id)
@@ -61,5 +75,5 @@ bool CreateConnection::cardIDCheck(QString id)
  * tapahtumakysely
  * nostorajakysely
  * kortinnumeroksely
- *
+ * rahamaara
  */

@@ -14,8 +14,14 @@ public:
     CreateConnection();
     ~CreateConnection();
     bool openConnection();
-    QString getBalance();
+    void getInfo(QString idtili);
     bool cardIDCheck(QString id);
+
+private:
+    QString enimi;
+    QString snimi;
+    QString osoite;
+    QString puhnum;
 };
 
 #endif // CREATECONNECTION_H
