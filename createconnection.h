@@ -14,7 +14,7 @@ public:
     CreateConnection();
     ~CreateConnection();
     bool openConnection();
-    QString getBalance();
+    QString getInfo(QString idtili);
     bool cardIDCheck();
     QString getAccID();
     double getPass();

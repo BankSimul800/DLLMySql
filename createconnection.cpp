@@ -26,11 +26,12 @@ bool CreateConnection::openConnection()
     return true;
 }
 
-void CreateConnection::getInfo(QString idtili)
+QString CreateConnection::getInfo(QString idtili)
 {
+    QString enimi;
     QSqlQuery infoDB;
 
-    infoDB.prepare("SELECT * FROM tili WHERE idtili=:idtili");
+    infoDB.prepare("SELECT nimi FROM asiakas WHERE idtili=:idtili");
     infoDB.bindValue(":idtili",idtili);
     infoDB.exec();
 
@@ -39,14 +40,15 @@ void CreateConnection::getInfo(QString idtili)
    //QString osoite;
    //QString puhnum;
 
-    while (infoDB.next())
+    if (infoDB.next())
     {
         enimi=infoDB.value(1).toString();
-        snimi=infoDB.value(2).toString();
-        osoite=infoDB.value(3).toString();
-        puhnum=infoDB.value(4).toString();
+        //snimi=infoDB.value(2).toString();
+        //osoite=infoDB.value(3).toString();
+        //puhnum=infoDB.value(4).toString();
+        return enimi;
     }
-
+else return "ei toimi";
 }
 
 void CreateConnection::setCardNum(QString cardNumber)
