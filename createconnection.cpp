@@ -156,12 +156,44 @@ QString CreateConnection::getInfoPhone()
 else return "ei toimi";
 }
 
+double CreateConnection::getBalance()
+{
+    QSqlQuery getBalanceDB;
+    double balance;
+
+    getBalanceDB.prepare("SELECT saldo FROM tili WHERE idtili=:idtili");
+    getBalanceDB.bindValue(":idtili", accID);
+    getBalanceDB.exec();
+
+    if(getBalanceDB.next())
+    {
+        balance = getBalanceDB.value(0).toDouble();
+        return balance;
+    }
+
+    else return 0;
+}
+
+double CreateConnection::getWithdrawLimit()
+{
+    QSqlQuery getLimitDB;
+    double limit;
+
+    getLimitDB.prepare("SELECT raja FROM nostoraja WHERE idtili=:idtili");
+    getLimitDB.bindValue(":idtili", accID);
+    getLimitDB.exec();
+
+    if(getLimitDB.next())
+    {
+        limit = getLimitDB.value(0).toDouble();
+        return limit;
+    }
+    else return 0;
+}
+
 /*
- * saldokysely
- * salasanakysely
  * asiakastietokysely
  * tapahtumakysely
  * nostorajakysely
- * kortinnumeroksely
- * rahamaara
+ *
  */

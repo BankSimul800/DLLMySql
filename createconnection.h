@@ -17,6 +17,8 @@ public:
     bool cardIDCheck();
     QString getAccID();
     double getPass();
+    double getBalance();
+    double getWithdrawLimit();
     void setCardNum(QString cardNumber);
 
     QString getInfoLastname();
