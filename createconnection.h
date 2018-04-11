@@ -16,12 +16,13 @@ public:
     bool openConnection();
     QString getBalance();
     bool cardIDCheck();
-    QString getAccIDFromCard();
-    QString getPass();
-    void setCardNum();
+    QString getAccID();
+    double getPass();
+    void setCardNum(QString cardNumber);
 
 private:
     QString cardNum;
+    QString accID;
 };
 
 #endif // CREATECONNECTION_H

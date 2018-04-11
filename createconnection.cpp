@@ -35,17 +35,25 @@ QString CreateConnection::getBalance()
     balanceDB.exec();
 }
 
+void CreateConnection::setCardNum(QString cardNumber)
+{
+    cardNum = cardNumber;
+}
+
 bool CreateConnection::cardIDCheck()
 {
     QSqlQuery cardCheckDB;
-    QString idTili;
 
     cardCheckDB.prepare("Select idtili FROM kortti WHERE korttinum=:id");
     cardCheckDB.bindValue(":id", cardNum);
     cardCheckDB.exec();
     if(cardCheckDB.exec())
     {
-        return true;
+        if(cardCheckDB.next())
+        {
+            accID = cardCheckDB.value(0).toString();
+            return true;
+        }
     }
 
     else
@@ -54,20 +62,22 @@ bool CreateConnection::cardIDCheck()
     }
 }
 
-QString CreateConnection::getPass(QString idtili)
+
+
+double CreateConnection::getPass()
 {
-    QString pass;
+    double pass;
     QSqlQuery getPassDB;
 
     getPassDB.prepare("SELECT tunnusluku FROM tili WHERE idtili=:idtili");
-    getPassDB.bindValue(":cardNum", idtili);
+    getPassDB.bindValue(":idtili", accID);
     getPassDB.exec();
     if(getPassDB.next())
     {
-        pass = getPassDB.value(0).toString();
+        pass = getPassDB.value(0).toDouble();
         return pass;
     }
-    else return "Password couldn't be retrieved";
+    else return 0;
 }
 
 
