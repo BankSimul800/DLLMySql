@@ -49,24 +49,52 @@ void CreateConnection::getInfo(QString idtili)
 
 }
 
-bool CreateConnection::cardIDCheck(QString id)
+void CreateConnection::setCardNum(QString cardNumber)
+{
+    cardNum = cardNumber;
+}
+
+bool CreateConnection::cardIDCheck()
 {
     QSqlQuery cardCheckDB;
 
-    cardCheckDB.prepare("Select idkortti FROM kortti WHERE idkortti=:id");
-    cardCheckDB.bindValue(":id", id);
+    cardCheckDB.prepare("Select idtili FROM kortti WHERE korttinum=:id");
+    cardCheckDB.bindValue(":id", cardNum);
     cardCheckDB.exec();
     if(cardCheckDB.exec())
     {
-        return true;
+        if(cardCheckDB.next())
+        {
+            accID = cardCheckDB.value(0).toString();
+            return true;
+        }
     }
-            else
+
+    else
     {
             return false;
     }
-
-
 }
+
+
+
+double CreateConnection::getPass()
+{
+    double pass;
+    QSqlQuery getPassDB;
+
+    getPassDB.prepare("SELECT tunnusluku FROM tili WHERE idtili=:idtili");
+    getPassDB.bindValue(":idtili", accID);
+    getPassDB.exec();
+    if(getPassDB.next())
+    {
+        pass = getPassDB.value(0).toDouble();
+        return pass;
+    }
+    else return 0;
+}
+
+
 
 /*
  * saldokysely

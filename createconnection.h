@@ -14,14 +14,15 @@ public:
     CreateConnection();
     ~CreateConnection();
     bool openConnection();
-    void getInfo(QString idtili);
-    bool cardIDCheck(QString id);
+    QString getBalance();
+    bool cardIDCheck();
+    QString getAccID();
+    double getPass();
+    void setCardNum(QString cardNumber);
 
 private:
-    QString enimi;
-    QString snimi;
-    QString osoite;
-    QString puhnum;
+    QString cardNum;
+    QString accID;
 };
 
 #endif // CREATECONNECTION_H
